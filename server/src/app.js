@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json({limit: "5mb"}));
 
 let corsOptions = {
-    origin: 'localhost:4200',
+    origin: 'http://localhost:4200',
     credentials: true,
     optionSuccessStatus: 200
 };

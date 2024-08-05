@@ -12,6 +12,7 @@
     "@mui/icons-material": "5.11.16",
     "@mui/material": "5.12.3",
     "ag-grid-react": "^32.0.2",
+    "axios": "^1.7.3",
     "chart.js": "4.3.0",
     "chroma-js": "2.4.2",
     "nodemon": "^3.1.4",
@@ -27,8 +28,8 @@
     "stylis-plugin-rtl": "2.1.1"
   },
   "scripts": {
-    "start": "nodemon --ext ts,tsx,json --exec \"react-scripts start\"",
-    "build": "nodemon --ext ts,tsx,json --exec \"react-scripts build\"",
+    "start": "nodemon --ext ts,tsx,json --exec \"set PORT=4200 && react-scripts start\"",
+    "build": "nodemon --ext ts,tsx,json --exec \"set PORT=4200 && react-scripts build\"",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "eslintConfig": {
