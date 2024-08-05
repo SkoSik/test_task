@@ -34,8 +34,8 @@ import reportsBarChartData from "layouts/rtl/data/reportsBarChartData";
 import reportsLineChartData from "layouts/rtl/data/reportsLineChartData";
 
 // RTL components
-import Projects from "layouts/rtl/components/Projects";
-import OrdersOverview from "layouts/rtl/components/OrdersOverview";
+import Projects from "layouts/rtl/components/Users";
+import OrdersOverview from "layouts/rtl/components/Orders";
 
 // Material Dashboard 2 React contexts
 import { useMaterialUIController, setDirection } from "context";

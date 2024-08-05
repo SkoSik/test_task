@@ -1016,13 +1016,7 @@ VALUES ('Lien', 'Bair', 'shaytrent@yahoo.com'),
        ('Dwayne', 'Hein', 'michelle8@hotmail.com'),
        ('Hoyt', 'Valdez', 'corrinne.simonson7698@hotmail.com'),
        ('Natosha', 'Frasier', 'scottwebster051@hotmail.com'),
-       ('Audra', 'Henley', 'floy_gladden@prediction.com'),
-       ('Shin', 'Benge', 'ana.oden@hotmail.com'),
-       ('Kenisha', 'Hanes', 'mohammed5@suggested.linz.museum'),
-       ('Brittanie', 'Forney', 'kimberli-seward-colburn@hotmail.com'),
-       ('Librada', 'Ali', 'agripinabattle@hotmail.com'),
-       ('Josue', 'Willett', 'angelia.trask15246@mud.com'),
-       ('Tabetha', 'Jaramillo', 'pearline-sturgeon100@hotmail.com');
+       ('Audra', 'Henley', 'floy_gladden@prediction.com');
 
 INSERT INTO "order" ("user_id", "date", "sum", "status")
 VALUES ('45', '2015-06-02', '125', 'EXPIRED'),
