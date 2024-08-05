@@ -1,4 +1,4 @@
-import {DataTypes} from "@sequelize/core";
+import {DataTypes, QueryTypes} from "@sequelize/core";
 import sequelize from "../sequelize.js";
 
 const Order = sequelize.define(
@@ -32,31 +32,25 @@ const Order = sequelize.define(
 
 Order.getAll = () =>
     sequelize.query(`SELECT *
-                     FROM "order"`, {type: "SELECT"})
+                     FROM "order"`, {type: QueryTypes.SELECT})
 
-Order.getAllInBetween = (count, start) =>
+Order.getByUserID = (user_id) =>
     sequelize.query(`SELECT *
                      FROM "order"
-                     LIMIT :count OFFSET :start`,
-        {
-            type: "SELECT",
-            replacements: {
-                count: count,
-                start: start
-            }
-        })
+                     WHERE user_id = ?`,
+        {type: QueryTypes.SELECT, replacements: [user_id]})
 
 Order.getByID = (id) =>
     sequelize.query(`SELECT *
                      FROM "order"
                      WHERE id = ?`,
-        {type: "SELECT", replacements: [id]})
+        {type: QueryTypes.SELECT, replacements: [id]})
 
 Order.create = ({user_id, date, sum, status}) =>
     sequelize.query(`INSERT INTO "order" (user_id, date, sum, status)
                      VALUES (:user_id, :date, :sum, :status)`,
         {
-            type: "INSERT",
+            type: QueryTypes.INSERT,
             replacements: {
                 user_id: user_id,
                 date: date,
@@ -72,7 +66,7 @@ Order.updateByID = ({id, date, sum, status}) =>
                          status = :status
                      WHERE id = :id`,
         {
-            type: "UPDATE",
+            type: QueryTypes.UPDATE,
             replacements: {
                 id: id,
                 date: date,
@@ -85,6 +79,6 @@ Order.deleteByID = (id) =>
     sequelize.query(`DELETE
                      FROM "order"
                      WHERE id = ?`,
-        {type: "DELETE", replacements: [id]})
+        {type: QueryTypes.DELETE, replacements: [id]})
 
 export default Order;

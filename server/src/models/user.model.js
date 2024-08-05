@@ -1,4 +1,4 @@
-import {DataTypes} from "@sequelize/core";
+import {DataTypes, QueryTypes} from "@sequelize/core";
 import sequelize from "../sequelize.js";
 import Order from "./order.model.js";
 
@@ -30,17 +30,17 @@ Order.belongsTo(User, {foreignKey: 'user_id'});
 
 User.getAll = () =>
     sequelize.query(`SELECT *
-                     FROM "user"`, {type: "SELECT"})
+                     FROM "user"`, {type: QueryTypes.SELECT})
 
-User.getAllInBetween = (count, start) =>
+User.getAllInBetween = (count, offset) =>
     sequelize.query(`SELECT *
                      FROM "user"
-                     LIMIT :count OFFSET :start`,
+                     LIMIT :count OFFSET :offset`,
         {
-            type: "SELECT",
+            type: QueryTypes.SELECT,
             replacements: {
                 count: count,
-                start: start
+                offset: offset
             }
         })
 
@@ -48,13 +48,13 @@ User.getByID = (id) =>
     sequelize.query(`SELECT *
                      FROM "user"
                      WHERE id = ?`,
-        {type: "SELECT", replacements: [id]})
+        {type: QueryTypes.SELECT, replacements: [id]})
 
 User.create = ({firstname, surname, email}) =>
     sequelize.query(`INSERT INTO "user" (firstname, surname, email)
                      VALUES (:firstname, :surname, :email)`,
         {
-            type: "INSERT",
+            type: QueryTypes.INSERT,
             replacements: {
                 firstname: firstname,
                 surname: surname,
@@ -69,7 +69,7 @@ User.updateByID = ({id, firstname, surname, email}) =>
                          email     = :email
                      WHERE id = :id`,
         {
-            type: "UPDATE",
+            type: QueryTypes.UPDATE,
             replacements: {
                 id: id,
                 firstname: firstname,
@@ -82,6 +82,6 @@ User.deleteByID = (id) =>
     sequelize.query(`DELETE
                      FROM "user"
                      WHERE id = ?`,
-        {type: "DELETE", replacements: [id]})
+        {type: QueryTypes.DELETE, replacements: [id]})
 
 export default User;
