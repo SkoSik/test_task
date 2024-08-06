@@ -15,7 +15,6 @@
     "axios": "^1.7.3",
     "chart.js": "4.3.0",
     "chroma-js": "2.4.2",
-    "nodemon": "^3.1.4",
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-chartjs-2": "5.2.0",
@@ -28,8 +27,8 @@
     "stylis": "4.1.4"
   },
   "scripts": {
-    "start": "nodemon --ext ts,tsx,json --exec \"set PORT=4200 && react-scripts start\"",
-    "build": "nodemon --ext ts,tsx,json --exec \"set PORT=4200 && react-scripts build\"",
+    "start": "set PORT=4200 && react-scripts start",
+    "build": "set PORT=4200 && react-scripts build",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "eslintConfig": {
