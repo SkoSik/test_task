@@ -24,8 +24,7 @@
     "react-router-dom": "6.11.0",
     "react-scripts": "5.0.1",
     "react-table": "7.8.0",
-    "stylis": "4.1.4",
-    "stylis-plugin-rtl": "2.1.1"
+    "stylis": "4.1.4"
   },
   "scripts": {
     "start": "nodemon --ext ts,tsx,json --exec \"set PORT=4200 && react-scripts start\"",
