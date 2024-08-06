@@ -126,6 +126,7 @@ function Orders({ userRef }) {
               sendNotification("Запись успешно добавлена", "success");
             })
             .catch((e) => sendNotification(e.response.data));
+        else sendNotification("Заполнены не все поля", "warning");
       }
     },
     [rowDefs, inputRow]
@@ -136,7 +137,7 @@ function Orders({ userRef }) {
     if (row) {
       setInputRow({ user_id: row.id, user_name: row.firstname + " " + row.surname });
       setIsNewRow(true);
-    }
+    } else sendNotification("Необходимо выбрать пользователя");
   };
 
   return (
