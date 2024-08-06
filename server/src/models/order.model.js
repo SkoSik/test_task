@@ -31,8 +31,10 @@ const Order = sequelize.define(
 
 
 Order.getAll = () =>
-    sequelize.query(`SELECT *
-                     FROM "order"`, {type: QueryTypes.SELECT})
+    sequelize.query(`SELECT "order".id, CONCAT(u.firstname, ' ', u.surname) as user_name, date, sum, status
+                     FROM "order"
+                              INNER JOIN "user" u on u.id = "order".user_id
+                     ORDER BY id`, {type: QueryTypes.SELECT})
 
 Order.getByUserID = (user_id) =>
     sequelize.query(`SELECT *
@@ -45,19 +47,6 @@ Order.getByID = (id) =>
                      FROM "order"
                      WHERE id = ?`,
         {type: QueryTypes.SELECT, replacements: [id]})
-
-Order.create = ({user_id, date, sum, status}) =>
-    sequelize.query(`INSERT INTO "order" (user_id, date, sum, status)
-                     VALUES (:user_id, :date, :sum, :status)`,
-        {
-            type: QueryTypes.INSERT,
-            replacements: {
-                user_id: user_id,
-                date: date,
-                sum: sum,
-                status: status
-            }
-        })
 
 Order.updateByID = ({id, date, sum, status}) =>
     sequelize.query(`UPDATE "order"

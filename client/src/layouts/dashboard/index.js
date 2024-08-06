@@ -27,9 +27,11 @@ import Footer from "examples/Footer";
 // Dashboard components
 import Users from "layouts/dashboard/components/Users";
 import Orders from "layouts/dashboard/components/Orders";
-import { useState } from "react";
+import { useRef } from "react";
 
 function Dashboard() {
+  const userRef = useRef();
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -37,10 +39,10 @@ function Dashboard() {
         <MDBox>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={6}>
-              <Users />
+              <Users userRef={userRef} />
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
-              <Orders />
+              <Orders userRef={userRef} />
             </Grid>
           </Grid>
         </MDBox>

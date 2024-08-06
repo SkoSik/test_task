@@ -54,8 +54,7 @@ const sortData = (sortModel, data) => {
   return resultOfSort;
 };
 
-function Users() {
-  const gridRef = useRef();
+function Users({ userRef }) {
   const [colDefs] = useState([
     { field: "id", headerName: "ID", flex: 1 },
     { field: "firstname", headerName: "Имя", flex: 3 },
@@ -85,13 +84,19 @@ function Users() {
 
   return (
     <Card>
-      <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={3}>
-        <MDBox>
-          <MDTypography variant="h6">Пользователи</MDTypography>
-        </MDBox>
+      <MDBox
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        pt={3}
+        px={3}
+        height={64}
+      >
+        <MDTypography variant="h6">Пользователи</MDTypography>
       </MDBox>
       <MDBox className="ag-theme-quartz" style={{ height: 650 }} p={3}>
         <AgGridReact
+          ref={userRef}
           columnDefs={colDefs}
           rowSelection={"single"}
           pagination={true}
