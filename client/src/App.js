@@ -46,6 +46,9 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -123,6 +126,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
+      <ReactNotifications />
       <CssBaseline />
       {layout === "dashboard" && (
         <>

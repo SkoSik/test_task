@@ -24,6 +24,16 @@ import MDTypography from "components/MDTypography";
 import { AgGridReact } from "ag-grid-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import MDButton from "../../../../components/MDButton";
+import { Store } from "react-notifications-component";
+
+const sendNotification = (message, type = "danger") => {
+  Store.addNotification({
+    type: type,
+    title: message,
+    container: "bottom-right",
+    dismiss: { duration: 3000, onScreen: true },
+  });
+};
 
 function Orders({ userRef }) {
   const orderRef = useRef();
@@ -55,6 +65,11 @@ function Orders({ userRef }) {
       editable: true,
       cellEditor: "agTextCellEditor",
       flex: 3,
+      valueSetter: (params) => {
+        if (params.newValue < 0) sendNotification("Сумма заказа не может быть отрицательной");
+        else params.data.name = params.data.sum = params.newValue;
+        return true;
+      },
     },
     {
       field: "status",
@@ -93,22 +108,24 @@ function Orders({ userRef }) {
         .then(() => {
           setRowDefs((rows) => rows.filter((r) => r.id !== row.id));
         })
-        .catch((e) => console.log(e));
+        .catch((e) => sendNotification(e.response.data));
+    else sendNotification("Необходимо выбрать заказ");
   }, []);
 
   const onRowValueChanged = useCallback(
     (params) => {
       const order = params.data;
       if (params?.rowPinned !== "top") {
-        Api.post("order/update", order).catch((e) => console.log(e));
+        Api.post("order/update", order).catch((e) => sendNotification(e.response.data));
       } else {
         if (order.user_id && order.date && order.sum && order.status)
           Api.post("order/create", order)
             .then(({ data: order }) => {
               setRowDefs([...rowDefs, { ...inputRow, id: order.id }]);
               setIsNewRow(false);
+              sendNotification("Запись успешно добавлена", "success");
             })
-            .catch((e) => console.log(e));
+            .catch((e) => sendNotification(e.response.data));
       }
     },
     [rowDefs, inputRow]
